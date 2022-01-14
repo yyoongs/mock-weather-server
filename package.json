@@ -1,0 +1,22 @@
+{
+  "name": "mock-weather-server",
+  "version": "1.0.0",
+  "description": "mock weather server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yyoongs/mock-weather-server.git"
+  },
+  "author": "Yongsung Cho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yyoongs/mock-weather-server/issues"
+  },
+  "homepage": "https://github.com/yyoongs/mock-weather-server#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
