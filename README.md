@@ -7,5 +7,10 @@
 > * file description
 >   > + node_modules
 >   >
->   >   sss
+>   >   this contains modules that need for running node.js
+>   >   
+>   > + app.js
+>   > 
+>   >   executable file
+>   >   run this command in terminal : ```node app.js```
 
