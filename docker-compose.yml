@@ -1,8 +1,14 @@
 services:
-  nodejs:
-    container_name: nodejs
-    image: "nodejs-test:latest"
-    ports:
-      - "8080:8080"
+  server:
+    image: "swiftlang/swift:nightly-focal"
+    volumes:
+      - /Users/yyoongs/code/labs/swift:/code
     environment:
-      - NODE_ENV=development
+      - USER=yyoongs
+    command: bash -c "apt-get update && apt-get install nodejs && node /code/node/app.js"
+  client:
+    image: "swiftlang/swift:nightly-focal"
+    volumes:
+      - /Users/yyoongs/code/labs/swift:/code
+    environment:
+      - USER=yyoongs
