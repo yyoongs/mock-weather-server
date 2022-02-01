@@ -1,0 +1,233 @@
+swagger: "2.0"
+info:
+  description: "CS561 Software Engineering Method week4 assignment4. This is swagger document on `Yongsung Cho's` mock server."
+  version: "1.0.0"
+  title: "CS561 Software Engineering Methods"
+  termsOfService: "https://github.com/oregon-state-innovation-lab/cs561-swift"
+  contact:
+    email: "choyongs@oregonstate.edu"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: ""
+tags:
+- name: "Weather"
+  description: "Data about weather"
+  externalDocs:
+    description: "Find out more"
+    url: "https://openweathermap.org/current"
+- name: "Test"
+  description: "CS561 assignment4 test APIs"
+- name: "Auth"
+  description: "CS561 assignment4 test APIs for authorization and authentication"
+schemes:
+- "http"
+paths:
+  /v1/weather:
+    get:
+      tags:
+      - "Weather"
+      summary: "Get data from OpenWeather server"
+      description: "should mock OpenWeather’s `GET /data/2.5/weather` endpoint."
+      operationId: "getData"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "successfully get data from OpenWeather server"
+          schema:
+            $ref: "#/definitions/data"
+        "400":
+          description: "Invalid status value"
+
+  /v1/hello:
+    get:
+      tags:
+      - "Test"
+      summary: "should return a greeting of your choice"
+      description: "This is API which is that you can get a greeting message."
+      operationId: "hello"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        "200":
+          description: "successfully get a greeting messages"
+        "400":
+          description: "Invalid status value"
+
+  /v1/auth:
+    post:
+      tags:
+      - "Auth"
+      summary: "send a username and password"
+      description: "accept a username and password and return a mock token."
+      operationId: "Auth"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Auth needs username and password to get mock token"
+        required: true
+        schema:
+          $ref: "#/definitions/Auth"
+      responses:
+        "200":
+          description: "successfully logged in and get token"
+        "400":
+          description: "Invalid status value"
+        "405":
+          description: "Invalid input"
+definitions:  
+  data:
+    type: "object"
+    properties:
+      coord:
+        $ref: "#/definitions/Coord"
+      weather:
+        $ref: "#/definitions/Weather"
+      base:
+        type: "string"
+        example: "stations"
+      main:
+        $ref: "#/definitions/Main"
+      visibility:
+        type: "integer"
+        example: "10000"
+      wind:
+        $ref: "#/definitions/Wind"
+      clouds:
+        $ref: "#/definitions/Clouds"
+      dt:
+        type: "integer"
+        example: "1643267190"
+      sys:
+        $ref: "#/definitions/Sys"
+      timezone:
+        type: "float"
+        example: "-28800"
+      id:
+        type: "integer"
+        example: "5720727"
+      name:
+        type: "string"
+        example: "Corvallis"
+      cod:
+        type: "integer"
+        example: "200"
+    xml:
+      name: "data"
+  Coord:
+    type: "object"
+    properties:
+      lon:
+        type: "float"
+        example: "-123.262"
+      lat:
+        type: "float"
+        example: "44.5646"
+    xml:
+      name: "Coord"
+  Weather:
+    type: "object"
+    properties:
+      id:
+        type: "float"
+        example: "800"
+      main:
+        type: "string"
+        example: "Clear"
+      description:
+        type: "string"
+        example: "clear sky"
+      icon:
+        type: "string"
+        example: "01n"
+    xml:
+      name: "Weather"
+  Main:
+    type: "object"
+    properties:
+      temp:
+        type: "float"
+        example: "272.28"
+      feels_like:
+        type: "float"
+        example: "272.28"
+      temp_min:
+        type: "float"
+        example: "269.18"
+      temp_max:
+        type: "float"
+        example: "277.85"
+      pressure:
+        type: "integer"
+        example: "1024"
+      humidity:
+        type: "integer"
+        example: "78"
+    xml:
+      name: "Main"
+  Wind:
+    type: "object"
+    properties:
+      speed:
+        type: "integer"
+        example: "0"
+      deg:
+        type: "integer"
+        example: "0"
+    xml:
+      name: "Wind"
+  Clouds:
+    type: "object"
+    properties:
+      all:
+        type: "integer"
+        example: "0"
+    xml:
+      name: "Clouds"
+  Sys:
+    type: "object"
+    properties:
+      type:
+        type: "integer"
+        example: "2"
+      id:
+        type: "integer"
+        example: "2040223"
+      country:
+        type: "string"
+        example: "US"
+      sunrise:
+        type: "integer"
+        example: "1643211475"
+      sunset:
+        type: "integer"
+        example: "1643245986"
+    xml:
+      name: "Sys"
+  Auth:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        example: "choyongs"
+      password:
+        type: "string"
+        example: "abcd"
+    xml:
+      name: "Auth"
