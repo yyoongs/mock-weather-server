@@ -230,6 +230,6 @@ definitions:
         example: "choyongs"
       password:
         type: "string"
-        example: "abcd"
+        example: "123456789"
     xml:
       name: "Auth"

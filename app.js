@@ -8,6 +8,7 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./modules/swagger.yaml');
 const bodyParser = require("body-parser");
+const axios = require('axios')
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,12 +37,26 @@ app.get('/v1/weather',(req,res) => {
     })});
 
 app.get('/v1/hello',(req,res) => {
-  res.send("hello world! Welcome to CS561 assignment4 test API!")  
+  var jsonDataObj = {'username': 'hey dude', 'password': "123456789"};
+  request.post({
+    headers: {'content-type' : 'application/x-www-form-urlencoded'},
+    url:     'http://localhost:3000/v1/auth',
+    body:    jsonDataObj
+  }, function(error, response, body){
+    res.send("h1111!\ndata : "+body) 
+  });
+  res.send("hello world! Welcome to CS561 assignment4 test API!\ndata : "+body)  
+
 });
   
 app.post('/v1/auth', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
+  var jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNob3lvbmdzIiwicGFzc3dvcmQiOiIxMjM0NTY3ODkifQ.XFjI5dtX3wbvK4Ps9q2F4A48sUw041oLQoiDYdOn5dg"
+  const now = new Date();
+  now.setMinutes(now.getMinutes()-now.getTimezoneOffset());
+  now.setDate(now.getDate() + 7);
+
   console.log("## post request"); 
   console.log(req.body); 
   console.log("## post request"); 
@@ -56,7 +71,7 @@ app.post('/v1/auth', function(req, res) {
   }
   request(options, (err,response,body) => {
       console.log(body)
-      res.send("You entered\nusername : "+username+"\npassword : "+password+"\nhere is mock tocken: "+body)
+      res.send("You entered\nusername : "+username+"\npassword : "+password+"\naccess-token : "+jwt+"\nexpiration date : "+JSON.stringify(now))
 
   })
 });
