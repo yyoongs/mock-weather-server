@@ -37,7 +37,17 @@ app.get('/v1/weather',(req,res) => {
     })});
 
 app.get('/v1/hello',(req,res) => {
-  res.send("hello world! Welcome to CS561 assignment4 test API!\ndata : test")  
+  // res.send("hello world! Welcome to CS561 assignment4 test API!\ndata : test")  
+  // get tocken by using v1/auth
+  var jsonData = {"username":"choyongs", "password":"123456789"}
+  request.post({
+    headers:{'content-type':'application/json'},
+    url: 'http://localhost:3000/v1/auth',
+    body: jsonData,
+    json: true
+  }, function(error, response,body){
+    res.json(body);
+  })
 
 });
   
