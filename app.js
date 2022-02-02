@@ -54,16 +54,10 @@ app.post('/v1/auth', function(req, res) {
   console.log("## post request"); 
   console.log("User name = "+username+", password is "+password);
 
-  const options = {
-    uri: "https://api.openweathermap.org/data/2.5/weather",
-    qs:{
-      q:"corvallis",
-      appid:"8a6f0159e2a07ce14b465d65c119d72b"
-    }
+  if (username == "choyongs" && password=="123456789") {
+    res.send("Authentication success!\n You entered\nusername : "+username+"\npassword : "+password+"\naccess-token : "+jwt+"\nexpiration date : "+JSON.stringify(now)+"(expiration date is 7days from now)")
   }
-  request(options, (err,response,body) => {
-      console.log(body)
-      res.send("You entered\nusername : "+username+"\npassword : "+password+"\naccess-token : "+jwt+"\nexpiration date : "+JSON.stringify(now))
-
-  })
+  else {
+    res.send("Authentication failed")
+  }
 });
