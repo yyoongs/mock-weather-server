@@ -44,6 +44,8 @@ paths:
             $ref: "#/definitions/data"
         "400":
           description: "Invalid status value"
+        "405":
+          description: "Invalid input"
 
   /v1/hello:
     get:
