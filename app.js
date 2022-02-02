@@ -58,6 +58,6 @@ app.post('/v1/auth', function(req, res) {
     res.send("Authentication success!\n You entered\nusername : "+username+"\npassword : "+password+"\naccess-token : "+jwt+"\nexpiration date : "+JSON.stringify(now)+"(expiration date is 7days from now)")
   }
   else {
-    res.send("Authentication failed")
+    res.send("Authentication failed. Try again.")
   }
 });
