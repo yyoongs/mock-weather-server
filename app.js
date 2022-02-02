@@ -55,7 +55,10 @@ app.post('/v1/auth', function(req, res) {
   console.log("User name = "+username+", password is "+password);
 
   if (username == "choyongs" && password=="123456789") {
-    res.send("Authentication success!\n You entered\nusername : "+username+"\npassword : "+password+"\naccess-token : "+jwt+"\nexpiration date : "+JSON.stringify(now)+"(expiration date is 7days from now)")
+    res.json({
+      "access-token": jwt,
+      "expires": now
+    })
   }
   else {
     res.send("Authentication failed. Try again.")
