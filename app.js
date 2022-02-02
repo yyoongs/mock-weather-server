@@ -37,7 +37,7 @@ app.get('/v1/weather',(req,res) => {
     })});
 
 app.get('/v1/hello',(req,res) => {
-  res.send("hello world! Welcome to CS561 assignment4 test API!\ndata : ")  
+  res.send("hello world! Welcome to CS561 assignment4 test API!\ndata : test")  
 
 });
   
