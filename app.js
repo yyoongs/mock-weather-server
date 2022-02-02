@@ -37,15 +37,7 @@ app.get('/v1/weather',(req,res) => {
     })});
 
 app.get('/v1/hello',(req,res) => {
-  var jsonDataObj = {'username': 'hey dude', 'password': "123456789"};
-  request.post({
-    headers: {'content-type' : 'application/x-www-form-urlencoded'},
-    url:     'http://localhost:3000/v1/auth',
-    body:    jsonDataObj
-  }, function(error, response, body){
-    res.send("h1111!\ndata : "+body) 
-  });
-  res.send("hello world! Welcome to CS561 assignment4 test API!\ndata : "+body)  
+  res.send("hello world! Welcome to CS561 assignment4 test API!\ndata : ")  
 
 });
   
