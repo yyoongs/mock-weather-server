@@ -66,7 +66,12 @@ app.get('/v1/hello',(req,res) => {
     json: true
   }, function(error, response,body){
     console.log(body.AccessToken);
-    res.json(body);
+    if (body.AccessToken == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNob3lvbmdzIiwicGFzc3dvcmQiOiIxMjM0NTY3ODkifQ.XFjI5dtX3wbvK4Ps9q2F4A48sUw041oLQoiDYdOn5dg") {
+      res.send("hello world! Welcome to CS561 assignment4 test API!\nYou are authorized user!\n")
+    }
+    else {
+      res.send("Authorization failed.")
+    }
   })
 
 });
