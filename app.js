@@ -56,8 +56,8 @@ app.post('/v1/auth', function(req, res) {
 
   if (username == "choyongs" && password=="123456789") {
     res.json({
-      "access-token": jwt,
-      "expires": now
+      "AccessToken": jwt,
+      "Expires": now
     })
   }
   else {
