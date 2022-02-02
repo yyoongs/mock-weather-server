@@ -8,11 +8,30 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./modules/swagger.yaml');
 const bodyParser = require("body-parser");
-const axios = require('axios')
+const axios = require('axios');
+const { json } = require('express');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  const allowedOrigins = ['https://editor.swagger.io', 'https://hoppscotch.io','http://localhost:3000/v1/auth'];
+  const origin = req.headers.origin;
+  
+  if (allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
+  // Request methods you wish to allow eg: GET, POST, OPTIONS, PUT, PATCH, DELETE
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Pass to next layer of middleware
+  next();
+});
 
 const port = 3000;
 const host = "0.0.0.0"
@@ -46,6 +65,7 @@ app.get('/v1/hello',(req,res) => {
     body: jsonData,
     json: true
   }, function(error, response,body){
+    console.log(body.AccessToken);
     res.json(body);
   })
 
@@ -66,8 +86,8 @@ app.post('/v1/auth', function(req, res) {
 
   if (username == "choyongs" && password=="123456789") {
     res.json({
-      "access-token": jwt,
-      "expires": now
+      "AccessToken": jwt,
+      "Expires": now
     })
   }
   else {
