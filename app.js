@@ -42,55 +42,40 @@ app.listen(port,host,() => {console.log('Node.js Express server is running on do
 })
 
 app.get('/v1/weather',(req,res) => {
+  var authHeaderToken = req.headers.authorization.replace('Bearer ', '');
 
-  var jsonData = {"username":"choyongs", "password":"123456789"}
-  request.post({
-    headers:{'content-type':'application/json'},
-    url: 'http://localhost:3000/v1/auth',
-    body: jsonData,
-    json: true
-  }, function(error, response,body){
-    console.log(body.AccessToken);
-    if (body.AccessToken == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNob3lvbmdzIiwicGFzc3dvcmQiOiIxMjM0NTY3ODkifQ.XFjI5dtX3wbvK4Ps9q2F4A48sUw041oLQoiDYdOn5dg") {
-      const options = {
-        uri: "https://api.openweathermap.org/data/2.5/weather",
-        qs:{
-          q:"corvallis",
-          appid:"8a6f0159e2a07ce14b465d65c119d72b"
-        }
+  if (authHeaderToken == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNob3lvbmdzIiwicGFzc3dvcmQiOiIxMjM0NTY3ODkifQ.XFjI5dtX3wbvK4Ps9q2F4A48sUw041oLQoiDYdOn5dg") {
+    const options = {
+      uri: "https://api.openweathermap.org/data/2.5/weather",
+      qs:{
+        q:"corvallis",
+        appid:"8a6f0159e2a07ce14b465d65c119d72b"
       }
-      request(options, (err,response,body) => {
-          console.log(body)
-          res.send("You are authorized user!\n\nHere is weather data : "+body)
-          }
-        )
     }
-    else {
-      res.send("Authorization failed.")
-    }
-  })
+    request(options, (err,response,body) => {
+        console.log(body)
+        res.send("You are authorized user!\n\nHere is weather data : "+body)
+        }
+      )
+  }
+  else {
+    res.send("Authorization failed.")
+  }
+
     
   });
 
 app.get('/v1/hello',(req,res) => {
   // res.send("hello world! Welcome to CS561 assignment4 test API!\ndata : test")  
   // get tocken by using v1/auth
-  var jsonData = {"username":"choyongs", "password":"123456789"}
-  request.post({
-    headers:{'content-type':'application/json'},
-    url: 'http://localhost:3000/v1/auth',
-    body: jsonData,
-    json: true
-  }, function(error, response,body){
-    console.log(body.AccessToken);
-    if (body.AccessToken == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNob3lvbmdzIiwicGFzc3dvcmQiOiIxMjM0NTY3ODkifQ.XFjI5dtX3wbvK4Ps9q2F4A48sUw041oLQoiDYdOn5dg") {
-      res.send("hello world! Welcome to CS561 assignment4 test API!\nYou are authorized user!\n")
-    }
-    else {
-      res.send("Authorization failed.")
-    }
-  })
-
+  var authHeaderToken = req.headers.authorization.replace('Bearer ', '');
+  console.log(authHeaderToken)
+  if (authHeaderToken == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNob3lvbmdzIiwicGFzc3dvcmQiOiIxMjM0NTY3ODkifQ.XFjI5dtX3wbvK4Ps9q2F4A48sUw041oLQoiDYdOn5dg") {
+    res.send("hello world! Welcome to CS561 assignment4 test API!\nYou are authorized user!\n")
+  }
+  else {
+    res.send("Authorization failed.")
+  }
 });
   
 app.post('/v1/auth', function(req, res) {
