@@ -55,6 +55,7 @@ app.get('/v1/weather',(req,res) => {
     request(options, (err,response,body) => {
         console.log(body)
         res.send("You are authorized user!\n\nHere is weather data : "+body)
+        // res.send(body)
         }
       )
   }
@@ -70,6 +71,7 @@ app.get('/v1/hello',(req,res) => {
   }
   else if (authHeaderToken.replace('Bearer ', '') == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNob3lvbmdzIiwicGFzc3dvcmQiOiIxMjM0NTY3ODkifQ.XFjI5dtX3wbvK4Ps9q2F4A48sUw041oLQoiDYdOn5dg") {
     res.send("hello world! Welcome to CS561 assignment4 test API!\nYou are authorized user!\n")
+    console.log("run hello api");
   }
   else {
     res.send("Authorization failed.")
