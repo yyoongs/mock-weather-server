@@ -90,19 +90,12 @@ paths:
       summary: "send a username and password"
       description: "accept a username and password and return a mock token."
       operationId: "Auth"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Auth needs username and password to get mock token"
+      requestBody:
         required: true
-        schema:
-          $ref: "#/definitions/Auth"
+        content:
+          application/json:
+            schema:
+                $ref: "#/definitions/Auth"
       responses:
         "200":
           description: "successfully logged in and get token"
