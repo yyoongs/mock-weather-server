@@ -44,6 +44,8 @@ paths:
             $ref: "#/definitions/data"
         "400":
           description: "Invalid status value"
+        "405":
+          description: "Invalid input"
 
   /v1/hello:
     get:
@@ -228,6 +230,6 @@ definitions:
         example: "choyongs"
       password:
         type: "string"
-        example: "abcd"
+        example: "123456789"
     xml:
       name: "Auth"
