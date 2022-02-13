@@ -2,7 +2,7 @@
 ### mock-weather-server
 > developer : Yongsung Cho
 >
-> * EC2 server &Rightarrow; http://3.212.210.206:3001/data/2.5/weather
+> * EC2 server &Rightarrow; http://3.212.210.206:3000/api-docs/
 >
 > * file description
 >   > + node_modules
