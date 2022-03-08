@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
-  const allowedOrigins = ['https://editor.swagger.io', 'https://hoppscotch.io','http://localhost:3000/v1/auth'];
+  const allowedOrigins = ['https://editor.swagger.io', 'https://hoppscotch.io','http://localhost:3000'];
   const origin = req.headers.origin;
   
   if (allowedOrigins.includes(origin)) {
