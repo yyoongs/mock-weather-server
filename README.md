@@ -15,6 +15,6 @@
 >   >
 >   > + package.json  
 >   > 
->   >   Set configuration
+>   >   Set configuration file
 
 
